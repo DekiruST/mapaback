@@ -41,13 +41,18 @@ app.use(cors({
 // WebSockets
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed"));
+      }
+    },
     methods: ["GET", "POST"],
-    credentials: true,
-    reconnectionAttempts: 10,
-    reconnectionDelay: 1000,
+    credentials: true
   }
 });
+
 
 // Inicializa WebSockets
 socketManager(io);
