@@ -41,7 +41,7 @@ router.post('/', authenticateToken, async (req, res) => {
 });
 
 // 📌 Leer todos los eventos
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const snapshot = await db.collection('events').get();
     const events = snapshot.docs.map(doc => doc.data());
