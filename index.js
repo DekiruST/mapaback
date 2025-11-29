@@ -95,15 +95,25 @@ const allowedOrigins = [
 // Configuración global de CORS (solo orígenes permitidos)
 const globalCors = cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('No accesible'));
+    console.log("🔎 Origin recibido:", origin);
+
+    // Permitir apps móviles (sin origin)
+    if (!origin) {
+      return callback(null, true);
     }
+
+    // Permitir dominios web autorizados
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Bloquear todo lo demás
+    return callback(new Error('No accesible'));
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 });
+
 
 
 // Configuración especial para /events (acepta !origin)
