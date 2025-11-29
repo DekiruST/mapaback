@@ -144,6 +144,15 @@ const io = new Server(server, {
   }
 });
 
+app.use((req, res, next) => {
+  console.log("📌 Nueva petición:", {
+    origin: req.headers.origin,
+    path: req.path,
+    method: req.method
+  });
+  next();
+});
+
 
 // Inicializa WebSockets
 socketManager(io);
