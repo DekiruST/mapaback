@@ -142,8 +142,6 @@ socketManager(io);
 app.use('/auth', globalCors, authRoutes);   // aplica CORS global
 app.use('/events', eventsCors, eventRoutes(io)); // aplica CORS especial
 
-console.log("🔎 Origin recibido:", origin);
-
 server.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
