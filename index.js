@@ -88,6 +88,7 @@ app.use(express.json());
 // Lista de orígenes permitidos (solo web)
 const allowedOrigins = [
   'http://localhost',
+  'https://localhost',
   'https://localhost:5173',
   'https://geolocalizaci-n-escolar.vercel.app'
 ];
